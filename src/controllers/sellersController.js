@@ -25,18 +25,43 @@ module.exports = {
     },
     async list(req, res, next) {
 
-        let sales = await Seller.findAll({
+        let seller = await Seller.findAll({
             attributes: ['id', 'name', 'created_at', 'updated_at'],
             where: req.query,
             include: {association: 'sales'}
         });
 
-        return res.status(200).send(sales);
+        return res.status(200).send(seller);
+    },
+    async alter(req, res, next) {
+
+        
+        let seller = await Seller.findByPk(req.params.id);
+        
+        if(!seller)
+            return next({
+                error: 'invalid_request',
+                error_description: 'Sale does not exist.',
+                status: 422
+            });
+
+        if(req.body.paid){
+            seller.update(req.body)
+        }
+
+        return res.status(200).send(seller);
     },
     async delete(req, res, next) {
 
-        let sales = await Seller.findAll({ attributes: ['id', 'name', 'created_at', 'updated_at'], where: req.query });
+        let count = await Seller.destroy(req.params.id);
 
-        return res.status(200).send(sales);
+        if(count > 0)
+            return res.status(200).send(sales);
+        else
+            next({
+                error: 'invalid_request',
+                error_description: 'Seller does not exist.',
+                status: 422
+            });
     }
 }

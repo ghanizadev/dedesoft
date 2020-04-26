@@ -4,7 +4,8 @@ class Sale extends Model {
     static init(sequelize){
         super.init({
             value: DataTypes.FLOAT,
-            code: DataTypes.STRING
+            code: DataTypes.STRING,
+            paid: DataTypes.BOOLEAN,
         },{
             sequelize
         });

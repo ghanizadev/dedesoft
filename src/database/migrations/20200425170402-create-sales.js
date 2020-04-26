@@ -19,9 +19,13 @@ module.exports = {
       },
       seller_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'sales', key: 'id' },
+        references: { model: 'sellers', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
+      },
+      paid: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,
