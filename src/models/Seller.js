@@ -5,6 +5,8 @@ class Seller extends Model {
         super.init({
             name: DataTypes.STRING,
             password: DataTypes.STRING,
+            code: DataTypes.STRING,
+            role: DataTypes.STRING,
         },{
             sequelize
         });

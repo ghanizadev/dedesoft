@@ -9,7 +9,16 @@ module.exports = {
         autoIncrement: true,
         allowNull: false
       },
+      code: {
+        unique: true,
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      role: {
         type: Sequelize.STRING,
         allowNull: false
       },

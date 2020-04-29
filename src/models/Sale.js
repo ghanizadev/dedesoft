@@ -1,4 +1,5 @@
 const {Model, DataTypes} = require('sequelize');
+const sequelizePaginate = require("sequelize-paginate");
 
 class Sale extends Model {
     static init(sequelize){
@@ -12,7 +13,7 @@ class Sale extends Model {
     }
 
     static associate(models) {
-        this.belongsTo(models.Seller, { foreignKey: 'seller_id', as: 'sales' })
+        this.belongsTo(models.Seller, { foreignKey: 'seller_id', as: 'seller' })
     }
 }
 
