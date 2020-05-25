@@ -28,7 +28,7 @@ const Box = styled.div`
     z-index: 3;
     display: flex;
     flex-direction: column;
-    min-width: 320px;
+    min-width: 500px;
 `;
 
 const Title = styled.p`
@@ -105,10 +105,9 @@ const ResetMessage = props => {
     const [url, setUrl] = useState('');
     const [login, setLogin] = useState('');
 
-    useEffect(() => {
-        if(props.user && props.user.length > 0)
-            setLogin(props.user.shift().code)
-    }, [props.user])
+    useEffect(()=>{
+        setLogin(props.user)
+    },[props.user])
 
     const makeUrl = (user, code) => {
         if(user && code){
@@ -138,7 +137,7 @@ const ResetMessage = props => {
                 Gerar código de autorização: 
                 <Button
                 onClick={async ()=> {
-                    await getResetCode({username: login}, cookies.authorization.access_token)
+                    await getResetCode( {username: login}, cookies.authorization.access_token)
                     .then(data => {
                         const str = makeUrl(data.username, data.code);
                         console.log(str)

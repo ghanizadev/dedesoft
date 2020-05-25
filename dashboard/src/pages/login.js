@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import {login} from '../services';
-import {useCookies} from 'react-cookie';
-import {useHistory} from 'react-router-dom';
+import { login } from '../services';
+import { useCookies } from 'react-cookie';
+import { useHistory } from 'react-router-dom';
 
 const Container = styled.div`
     width: 100vw;
@@ -70,7 +70,14 @@ const CopyRight = styled.div`
 const Login = props => {
     const [state, setState] = React.useState({});
     const [ , setCookie] = useCookies(['authorization']);
+    const [url, setUrl] = useState('');
     const history = useHistory();
+
+    // const location = useLocation();
+
+    // useEffect(() => {
+    //     setUrl(window.location.hostname);
+    // }, [url])
 
     return(
         <Container>
@@ -86,11 +93,14 @@ const Login = props => {
                     .then(response => {
                         switch(response.status){
                             case 200:
-                                setCookie('authorization', response.data, {sameSite: 'lax'});
+                                setCookie('authorization', response.data);
                                 history.push('/dashboard');
                                 break;
                             case 401:
                                 window.alert("Usuário e/ou senha incorretos.");
+                                break;
+                            case 403:
+                                window.alert("Verifique se o usuário e senha form devidamente preenchidos.");
                                 break;
                             default:
                                 window.alert("Erro inesperado, verifique o status do servidor.");
@@ -102,7 +112,7 @@ const Login = props => {
                 <a href="/nova-senha">Está em senha?</a>
             </Box>
             <CopyRight>
-                <a style={{margin: 'auto'}} href="https://ghanizadev.github.io" rel="noopener noreferrer" target="_blank">© 2020 ghanizadev</a>
+                <a style={{margin: 'auto'}} href="https://ghanizadev.github.io" rel="noopener noreferrer" target="_blank">ghanizadev, 2020</a>
             </CopyRight>
         </Container>
     );

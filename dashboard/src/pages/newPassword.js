@@ -60,7 +60,6 @@ const Login = props => {
 
     useEffect(()=>{
         setState({...state, username: query.user, code: query.code})
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return(
