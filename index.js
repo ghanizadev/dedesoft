@@ -11,7 +11,6 @@ const ip = require('ip');
 const {runMigrations, connection} = require('./src/database');
 const handler = require('serve-handler');
 const http = require('http');
-;
 
 connection;
 
@@ -202,4 +201,4 @@ const exitHandler = async () => {
 process.on('exit', () => exitHandler());
 process.on('SIGINT', () => exitHandler());
 
-run().catch(console.error)
+run().catch(console.error);
